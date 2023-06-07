@@ -26,7 +26,7 @@ RUN tlmgr install \
       collection-latexextra \
       collection-fontsrecommended \
       collection-langjapanese \
-      sinunitx \
+      siunitx \
       latexmk
 
 # Install latexindent
