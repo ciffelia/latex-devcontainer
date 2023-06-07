@@ -1,0 +1,32 @@
+{
+  "name": "LaTeX",
+
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "James-Yu.latex-workshop"
+      ],
+      "settings": {
+        "latex-workshop.latex.tools": [
+          {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": ["%DOC_EXT%"]
+          }
+        ],
+        "latex-workshop.latex.recipes": [
+          {
+            "name": "compile",
+            "tools": ["latexmk"]
+          }
+        ],
+        "latex-workshop.latex.autoClean.run": "onBuilt"
+      }
+    }
+  }
+}
