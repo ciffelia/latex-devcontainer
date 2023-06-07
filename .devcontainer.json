@@ -8,6 +8,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "eamodio.gitlens",
         "GitHub.copilot",
         "James-Yu.latex-workshop"
       ],
