@@ -1,3 +1,5 @@
+# syntax = docker/dockerfile:1
+
 FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
 ENV TZ Asia/Tokyo
@@ -34,3 +36,11 @@ RUN curl -fLo /usr/local/bin/latexindent https://github.com/cmhughes/latexindent
     chmod +x /usr/local/bin/latexindent
 
 RUN mktexlsr
+
+# Create font cache
+# https://qiita.com/doraTeX/items/f40f9597763ca63daabb
+RUN bash -eu <<EOF
+for x in $(luaotfload-tool --list=* --fields=fullpath); do
+  printf '\\relax\\input luaotfload.sty \\font\\x[%s]\\bye' "$x" | luatex > /dev/null
+done
+EOF
