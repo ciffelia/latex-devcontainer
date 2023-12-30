@@ -15,7 +15,8 @@
       "settings": {
         "editor.unicodeHighlight.allowedCharacters": {
           "，": true,
-          "．": true
+          "．": true,
+          "：": true
         },
         "latex-workshop.latex.tools": [
           {
