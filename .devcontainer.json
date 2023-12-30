@@ -13,6 +13,10 @@
         "James-Yu.latex-workshop"
       ],
       "settings": {
+        "editor.unicodeHighlight.allowedCharacters": {
+          "，": true,
+          "．": true
+        },
         "latex-workshop.latex.tools": [
           {
             "name": "latexmk",
