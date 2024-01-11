@@ -10,7 +10,8 @@
       "extensions": [
         "eamodio.gitlens",
         "GitHub.copilot",
-        "James-Yu.latex-workshop"
+        "James-Yu.latex-workshop",
+        "taichi.vscode-textlint"
       ],
       "settings": {
         "editor.unicodeHighlight.allowedCharacters": {

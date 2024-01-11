@@ -34,3 +34,12 @@ RUN curl -fLo /usr/local/bin/latexindent https://github.com/cmhughes/latexindent
     chmod +x /usr/local/bin/latexindent
 
 RUN mktexlsr
+
+# Install Node.js
+ENV VOLTA_HOME=/usr/local/volta
+ENV PATH=${VOLTA_HOME}/bin:${PATH}
+RUN curl https://get.volta.sh | bash -s -- --skip-setup
+RUN volta install node@20
+
+# Install textlint
+RUN npm install -g prh@^5.4.4 textlint@^13.4.1 textlint-filter-rule-comments@^1.2.2 textlint-plugin-latex2e@^1.2.1 textlint-rule-preset-ja-engineering-paper@^1.0.4 textlint-rule-preset-ja-spacing@^2.3.0 textlint-rule-preset-ja-technical-writing@^10.0.1 textlint-rule-preset-jtf-style@^2.3.14 textlint-rule-prh@^5.3.0 textlint-rule-spellcheck-tech-word@^5.0.0
