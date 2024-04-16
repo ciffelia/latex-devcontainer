@@ -41,4 +41,4 @@ RUN curl https://get.volta.sh | bash -s -- --skip-setup
 RUN volta install node@20
 
 # Install pnpm
-RUN npm install -g pnpm@^8
+RUN npm install -g pnpm@^9
