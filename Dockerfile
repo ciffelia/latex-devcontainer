@@ -6,8 +6,6 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y ca-certificates perl libfontconfig-dev libfreetype-dev && \
     rm -rf /var/lib/apt/lists/*
 
-ARG TEXLIVE_VERSION=2023
-
 RUN mkdir /tmp/install-tl-unx && \
     curl -fL https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
       tar xz -C /tmp/install-tl-unx --strip-components=1 && \
@@ -20,6 +18,7 @@ RUN mkdir /tmp/install-tl-unx && \
       --profile=/tmp/install-tl-unx/texlive.profile && \
     rm -rf /tmp/install-tl-unx
 
+ARG TEXLIVE_VERSION=2024
 ENV PATH=/usr/local/texlive/${TEXLIVE_VERSION}/bin/x86_64-linux:$PATH
 
 RUN tlmgr install \
