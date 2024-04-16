@@ -1,10 +1,8 @@
 {
   "name": "LaTeX",
-
   "build": {
     "dockerfile": "Dockerfile"
   },
-
   "customizations": {
     "vscode": {
       "extensions": [
@@ -14,10 +12,8 @@
         "taichi.vscode-textlint"
       ],
       "settings": {
-        "editor.unicodeHighlight.allowedCharacters": {
-          "，": true,
-          "．": true,
-          "：": true
+        "[latex]": {
+          "editor.defaultFormatter": "James-Yu.latex-workshop"
         },
         "latex-workshop.latex.tools": [
           {
