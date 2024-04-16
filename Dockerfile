@@ -28,11 +28,11 @@ RUN tlmgr install \
       siunitx \
       latexmk
 
-# Install latexindent
-RUN curl -fLo /usr/local/bin/latexindent https://github.com/cmhughes/latexindent.pl/releases/download/V3.21/latexindent-linux && \
-    chmod +x /usr/local/bin/latexindent
-
 RUN mktexlsr
+
+# Install latexindent
+RUN curl -sSfLo /usr/local/bin/latexindent https://github.com/cmhughes/latexindent.pl/releases/download/V3.23.9/latexindent-linux && \
+    chmod +x /usr/local/bin/latexindent
 
 # Install Node.js
 ENV VOLTA_HOME=/usr/local/volta
