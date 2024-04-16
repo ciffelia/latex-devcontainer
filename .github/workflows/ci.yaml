@@ -29,5 +29,6 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           imageName: ghcr.io/ciffelia/latex-devcontainer
+          imageTag: latest,git-${{ github.sha }}
           cacheFrom: ghcr.io/ciffelia/latex-devcontainer
           refFilterForPush: refs/heads/main
