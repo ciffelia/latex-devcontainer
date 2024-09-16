@@ -33,12 +33,3 @@ RUN mktexlsr
 # Install latexindent
 RUN curl -sSfLo /usr/local/bin/latexindent https://github.com/cmhughes/latexindent.pl/releases/download/V3.23.9/latexindent-linux && \
     chmod +x /usr/local/bin/latexindent
-
-# Install Node.js
-ENV VOLTA_HOME=/usr/local/volta
-ENV PATH=${VOLTA_HOME}/bin:${PATH}
-RUN curl https://get.volta.sh | bash -s -- --skip-setup
-RUN volta install node@20
-
-# Install pnpm
-RUN npm install -g pnpm@^9

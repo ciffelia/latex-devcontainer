@@ -8,8 +8,7 @@
       "extensions": [
         "eamodio.gitlens",
         "GitHub.copilot",
-        "James-Yu.latex-workshop",
-        "taichi.vscode-textlint"
+        "James-Yu.latex-workshop"
       ],
       "settings": {
         "[latex]": {
