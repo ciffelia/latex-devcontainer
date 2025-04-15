@@ -25,7 +25,8 @@ RUN tlmgr install \
       collection-fontsrecommended \
       collection-langjapanese \
       siunitx \
-      latexmk
+      latexmk && \
+    tlmgr path add
 
 RUN mktexlsr
 
