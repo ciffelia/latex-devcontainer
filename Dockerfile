@@ -18,8 +18,7 @@ RUN mkdir /tmp/install-tl-unx && \
       --profile=/tmp/install-tl-unx/texlive.profile && \
     rm -rf /tmp/install-tl-unx
 
-ARG TEXLIVE_VERSION=2024
-ENV PATH=/usr/local/texlive/${TEXLIVE_VERSION}/bin/x86_64-linux:$PATH
+RUN /usr/local/texlive/*/bin/*/tlmgr path add
 
 RUN tlmgr install \
       collection-latexextra \
