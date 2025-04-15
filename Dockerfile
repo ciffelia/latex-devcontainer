@@ -25,11 +25,8 @@ RUN tlmgr install \
       collection-fontsrecommended \
       collection-langjapanese \
       siunitx \
-      latexmk && \
+      latexmk \
+      latexindent && \
     tlmgr path add
 
 RUN mktexlsr
-
-# Install latexindent
-RUN curl -sSfLo /usr/local/bin/latexindent https://github.com/cmhughes/latexindent.pl/releases/download/V3.23.9/latexindent-linux && \
-    chmod +x /usr/local/bin/latexindent
