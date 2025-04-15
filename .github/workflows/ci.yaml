@@ -7,13 +7,24 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
-  contents: read
-  packages: write
+permissions: {}
+
+env:
+  image_name: ghcr.io/ciffelia/latex-devcontainer
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        include:
+          - runs-on: ubuntu-24.04
+            arch: amd64
+          - runs-on: ubuntu-24.04-arm
+            arch: arm64
+    runs-on: ${{ matrix.runs-on }}
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +39,35 @@ jobs:
       - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/ciffelia/latex-devcontainer
-          imageTag: latest,git-${{ github.sha }}
-          cacheFrom: ghcr.io/ciffelia/latex-devcontainer
+          imageName: ${{ env.image_name }}
+          imageTag: git-${{ github.sha }}-${{ matrix.arch }}
+          cacheFrom: ${{ env.image_name }}:latest-${{ matrix.arch }}
           refFilterForPush: refs/heads/main
+
+  merge-images:
+    if: github.ref == 'refs/heads/main'
+    needs: [build]
+    runs-on: ubuntu-24.04
+    permissions:
+      packages: write
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create and push multi-architecture manifest
+        run: |-
+          docker manifest create "${image_name}:git-${GITHUB_SHA}" \
+            "${image_name}:git-${GITHUB_SHA}-amd64" \
+            "${image_name}:git-${GITHUB_SHA}-arm64"
+          docker manifest inspect "${image_name}:git-${GITHUB_SHA}"
+          docker manifest push "${image_name}:git-${GITHUB_SHA}"
+
+      - name: Create and push latest image tags
+        run: |-
+          skopeo copy --all "docker://${image_name}:git-${GITHUB_SHA}-amd64" "docker://${image_name}:latest-amd64"
+          skopeo copy --all "docker://${image_name}:git-${GITHUB_SHA}-arm64" "docker://${image_name}:latest-arm64"
+          skopeo copy --all "docker://${image_name}:git-${GITHUB_SHA}" "docker://${image_name}:latest"
