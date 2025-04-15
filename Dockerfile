@@ -30,3 +30,8 @@ RUN tlmgr install \
     tlmgr path add
 
 RUN mktexlsr
+
+# Install latexindent dependencies
+RUN cpan -i App::cpanminus \
+    cpanm YAML::Tiny \
+    cpanm File::HomeDir
