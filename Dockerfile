@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
 
-ENV TZ Asia/Tokyo
+ENV TZ=Asia/Tokyo
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y ca-certificates perl libfontconfig-dev libfreetype-dev && \
