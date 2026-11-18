@@ -74,3 +74,17 @@ jobs:
           skopeo copy --all "docker://${image_name}:git-${GITHUB_SHA}-amd64" "docker://${image_name}:latest-amd64"
           skopeo copy --all "docker://${image_name}:git-${GITHUB_SHA}-arm64" "docker://${image_name}:latest-arm64"
           skopeo copy --all "docker://${image_name}:git-${GITHUB_SHA}" "docker://${image_name}:latest"
+
+  verify-lockfile:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - run: gh extension install github/gh-actions-lock --pin v0.4.1
+      - run: gh actions-lock --verify
